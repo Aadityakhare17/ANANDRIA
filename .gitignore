@@ -1,0 +1,49 @@
+# Environment & Secrets (NEVER COMMIT)
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing & Virtual Environments
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+ENV/
+env/
+
+# Node & Frontend Build Caches
+node_modules/
+**/node_modules/
+.vite/
+.vite-temp/
+.vitest-cache/
+dist/
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

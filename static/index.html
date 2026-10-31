@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANANDRIA – GenAI Event Planning Assistant</title>
+  <meta name="description" content="ANANDRIA is a GenAI-powered event planning assistant for Weddings, Birthdays, and Community Events.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/styles.css?v=2.2">
+</head>
+<body>
+  <!-- Skip to main content (WCAG) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ======================================================
+       INTRO / LANDING PAGE
+  ====================================================== -->
+  <div id="page-landing" class="page page-landing-visible">
+    <!-- Active Plan Notification Bar (Appears when user has a cached plan) -->
+    <div id="landing-active-plan-banner" class="landing-active-banner hidden">
+      <div class="active-banner-inner">
+        <span class="active-banner-sparkle">✨</span>
+        <span class="active-banner-text">You have an active plan: <strong id="landing-active-plan-name">Royal Celebration</strong> (<span id="landing-active-plan-meta">INR 35,00,000</span>)</span>
+        <button id="btn-landing-resume" class="btn btn-primary btn-sm">Resume in Dashboard →</button>
+      </div>
+    </div>
+
+    <!-- Intro Header Navigation -->
+    <nav class="landing-nav">
+      <div class="landing-nav-brand">
+        <span class="brand-crest" aria-hidden="true">✦</span>
+        <span class="brand-name">ANANDRIA</span>
+        <span class="brand-badge-pill">AI Co-Pilot</span>
+      </div>
+      <div class="landing-nav-links">
+        <a href="#landing-types" class="nav-link">Event Types</a>
+        <a href="#landing-features" class="nav-link">Features</a>
+        <a href="#landing-how" class="nav-link">How It Works</a>
+      </div>
+      <div class="landing-nav-actions">
+        <button id="btn-landing-apikey" class="btn btn-outline btn-sm">🔑 API Key</button>
+        <button id="btn-landing-enter" class="btn btn-primary btn-sm">Enter Dashboard →</button>
+      </div>
+    </nav>
+
+    <!-- Hero Section (Matches Image 1 Structure & Modern Flow) -->
+    <section class="landing-hero" aria-label="Hero">
+      <div class="landing-hero-bg-orb orb-sapphire"></div>
+      <div class="landing-hero-bg-orb orb-cyan"></div>
+      <div class="landing-hero-bg-orb orb-emerald"></div>
+
+      <div class="landing-hero-content">
+        <div class="landing-badge">
+          <span class="badge-sparkle">✨</span>
+          <span>Powered by Gen AI</span>
+        </div>
+        <h1 class="landing-title">
+          Turn Every Celebration<br>
+          into an <span class="landing-title-gradient">Unforgettable Masterpiece</span>
+        </h1>
+        <p class="landing-subtitle">
+          ANANDRIA AI generates personalized event plans, smart budgets, preparation timelines, and vendor checklists — all tailored to your vision.
+        </p>
+        <div class="landing-ctas">
+          <button class="btn btn-hero-white btn-xl" id="btn-get-started">
+            Get Started Free →
+          </button>
+          <button class="btn btn-hero-glass btn-xl" id="btn-view-dashboard">
+            View Dashboard
+          </button>
+        </div>
+        <div class="landing-trust-row">
+          <span class="trust-item"><strong style="color:var(--color-emerald);">100%</strong> Deterministic Math</span>
+          <span class="trust-sep">·</span>
+          <span class="trust-item"><strong style="color:var(--color-cyan);">4</strong> Currencies (₹, $, €, £)</span>
+          <span class="trust-sep">·</span>
+          <span class="trust-item"><strong style="color:var(--color-gold);">Offline</strong> Simulator Ready</span>
+          <span class="trust-sep">·</span>
+          <span class="trust-item"><strong style="color:var(--color-rose);">Zero</strong> Stored Secrets</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Celebration Categories Showcase (Multi-Color) -->
+    <section class="landing-types-section" id="landing-types" aria-labelledby="types-heading">
+      <div class="section-container">
+        <div class="section-header-center">
+          <span class="section-eyebrow" style="color:var(--color-gold);">CELEBRATION CATEGORIES</span>
+          <h2 id="types-heading" class="section-heading">Tailored Planning for Every Occasion</h2>
+          <p class="section-subtext">Choose an event category below to launch the wizard with curated presets and localized intelligence.</p>
+        </div>
+
+        <div class="celebration-cards-grid">
+          <!-- Card 1: Weddings (Gold & Amber) -->
+          <div class="celebration-type-card card-wedding">
+            <div class="card-accent-glow glow-gold"></div>
+            <div class="c-icon-box gold-icon">💍</div>
+            <h3 class="c-title">Royal &amp; Modern Weddings</h3>
+            <p class="c-desc">Multi-day ceremonies, banquet budgeting, bridal styling, sangeet choreographers, and cultural rituals.</p>
+            <ul class="c-features">
+              <li>✨ Multi-day ceremony timelines (Mehendi, Sangeet, Pheras)</li>
+              <li>✨ Per-guest catering calculators &amp; Jain/diet counters</li>
+              <li>✨ Curated royal emerald, vintage gold &amp; floral palettes</li>
+            </ul>
+            <button class="btn btn-primary btn-sm c-card-btn" data-preset="Wedding">Plan Wedding →</button>
+          </div>
+
+          <!-- Card 2: Birthdays (Coral & Rose) -->
+          <div class="celebration-type-card card-birthday">
+            <div class="card-accent-glow glow-coral"></div>
+            <div class="c-icon-box coral-icon">🎂</div>
+            <h3 class="c-title">Milestone Birthdays &amp; Parties</h3>
+            <p class="c-desc">1st birthdays, sweet sixteens, silver jubilees, neon dance nights, bespoke cakes, and custom entertainment.</p>
+            <ul class="c-features">
+              <li>🎈 Milestone themes (Neon, Retro, Boho, Carnival)</li>
+              <li>🎈 DJ, photo booths, cocktail stations &amp; anchors</li>
+              <li>🎈 Dynamic entertainment &amp; party favors budget</li>
+            </ul>
+            <button class="btn btn-sm c-card-btn btn-coral-card" data-preset="Birthday">Plan Birthday →</button>
+          </div>
+
+          <!-- Card 3: Community Events (Emerald & Sapphire) -->
+          <div class="celebration-type-card card-community">
+            <div class="card-accent-glow glow-emerald"></div>
+            <div class="c-icon-box emerald-icon">🎉</div>
+            <h3 class="c-title">Community Festivals &amp; Melas</h3>
+            <p class="c-desc">Cultural gatherings, society festivals, fundraisers, sports meets, public stages, and mass community feasts.</p>
+            <ul class="c-features">
+              <li>🌟 Large-scale crowd safety &amp; permit checklists</li>
+              <li>🌟 Stage sound, lighting &amp; volunteer milestones</li>
+              <li>🌟 Multi-sponsor allocation &amp; ticket revenue variance</li>
+            </ul>
+            <button class="btn btn-sm c-card-btn btn-emerald-card" data-preset="Community Event">Plan Community Event →</button>
+          </div>
+
+          <!-- Card 4: College Events (Cyan & Indigo) -->
+          <div class="celebration-type-card card-college">
+            <div class="card-accent-glow glow-cyan"></div>
+            <div class="c-icon-box cyan-icon">🎓</div>
+            <h3 class="c-title">College Fests &amp; Concerts</h3>
+            <p class="c-desc">Annual cultural fests, pro-nites, celebrity concerts, technical hackathons, freshers &amp; farewell galas.</p>
+            <ul class="c-features">
+              <li>🎸 Concert audio riders, line arrays &amp; intelligent lighting</li>
+              <li>🎸 Celebrity / artist management, backstage &amp; hospitality</li>
+              <li>🎸 Student committee task milestones &amp; sponsor tiering</li>
+            </ul>
+            <button class="btn btn-sm c-card-btn btn-cyan-card" data-preset="College Event">Plan College Event →</button>
+          </div>
+
+          <!-- Card 5: Custom Events (Amethyst & Violet) -->
+          <div class="celebration-type-card card-custom">
+            <div class="card-accent-glow glow-amethyst"></div>
+            <div class="c-icon-box amethyst-icon">⚡</div>
+            <h3 class="c-title">Custom &amp; Bespoke Galas</h3>
+            <p class="c-desc">Corporate summits, anniversary banquets, private retreats, product launches, or uniquely tailored celebrations.</p>
+            <ul class="c-features">
+              <li>💫 Freeform aesthetic styling and custom budget allocation</li>
+              <li>💫 Dedicated hospitality, VIP seating &amp; agenda tracking</li>
+              <li>💫 Flexible vendor checklist adapted to your exact vision</li>
+            </ul>
+            <button class="btn btn-sm c-card-btn btn-amethyst-card" data-preset="Custom Event">Plan Custom Event →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section (3 Interactive Steps) -->
+    <section class="landing-how-section" id="landing-how" aria-labelledby="how-heading">
+      <div class="section-container">
+        <div class="section-header-center">
+          <span class="section-eyebrow" style="color:var(--color-sapphire-light);">SIMPLE 3-STEP WORKFLOW</span>
+          <h2 id="how-heading" class="section-heading">How ANANDRIA Crafts Your Plan</h2>
+          <p class="section-subtext">The seamless bridge between generative creativity and deterministic financial math.</p>
+        </div>
+
+        <div class="how-steps-grid">
+          <div class="step-card">
+            <div class="step-number" style="background:linear-gradient(135deg, #F59E0B, #D97706);">1</div>
+            <h3 class="step-title">Share Your Vision</h3>
+            <p class="step-desc">Enter your event type, guest count, total budget, target date, regional vibe keywords, and dietary notes.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number" style="background:linear-gradient(135deg, #3B82F6, #1D4ED8);">2</div>
+            <h3 class="step-title">GenAI Blueprint Formulation</h3>
+            <p class="step-desc">Gemini 2.0 Flash constructs a structured event plan with categorized budgets, milestone schedule, and vendor tasks.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number" style="background:linear-gradient(135deg, #10B981, #047857);">3</div>
+            <h3 class="step-title">Fine-Tune &amp; Execute</h3>
+            <p class="step-desc">Adjust sliders with real-time recalculation, check off vendors, monitor RSVPs, and export to PDF, JSON or Markdown.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Cards Matrix (Multi-Color Accent Borders) -->
+    <section class="landing-features" id="landing-features" aria-labelledby="features-heading">
+      <div class="section-container">
+        <div class="section-header-center">
+          <span class="section-eyebrow" style="color:var(--color-cyan);">POWERFUL CAPABILITIES</span>
+          <h2 id="features-heading" class="section-heading">Everything You Need in One Unified Studio</h2>
+          <p class="section-subtext">Professional event planner tools designed with WCAG 2.1 AA accessibility and instant reactivity.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card border-gold">
+            <div class="feature-icon">💰</div>
+            <h3 class="feature-title" style="color:var(--color-gold);">Dynamic Budget Planner</h3>
+            <p class="feature-desc">Interactive SVG donut &amp; bar charts with proportional sliders. Automatic rebalancing ensures you never accidentally exceed total funds.</p>
+          </div>
+          <div class="feature-card border-cyan">
+            <div class="feature-icon">📅</div>
+            <h3 class="feature-title" style="color:var(--color-cyan);">Timeline &amp; Live Ticker</h3>
+            <p class="feature-desc">Phase-based milestone schedule from 6 months out to event day, paired with a real-time 1-second precision countdown clock.</p>
+          </div>
+          <div class="feature-card border-sapphire">
+            <div class="feature-icon">🏢</div>
+            <h3 class="feature-title" style="color:var(--color-sapphire-light);">Vendor Checklist Board</h3>
+            <p class="feature-desc">Filterable vendor directory with Pending, Contacted, and Booked status toggles, estimated costs, and completion progress.</p>
+          </div>
+          <div class="feature-card border-coral">
+            <div class="feature-icon">🎨</div>
+            <h3 class="feature-title" style="color:var(--color-coral-light);">Curated Themes &amp; Palettes</h3>
+            <p class="feature-desc">Bespoke aesthetic themes, clickable hex swatches that copy to your clipboard, authentic multi-course menus, and guest activities.</p>
+          </div>
+          <div class="feature-card border-emerald">
+            <div class="feature-icon">👥</div>
+            <h3 class="feature-title" style="color:var(--color-emerald);">Guest Matrix &amp; RSVPs</h3>
+            <p class="feature-desc">Track household invitations, plus-ones, table assignments, and dietary counters (Vegetarian, Jain, Vegan, Non-Veg) with CSV export.</p>
+          </div>
+          <div class="feature-card border-amethyst">
+            <div class="feature-icon">🤖</div>
+            <h3 class="feature-title" style="color:#C4B5FD;">AI Co-Pilot Assistant</h3>
+            <p class="feature-desc">Conversational plan refinement: prompt "Trim budget 15%", "Go eco-friendly", or "Add rain backup tasks" and watch the plan update instantly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Call to Action Section -->
+    <section class="landing-cta-banner">
+      <div class="cta-banner-content">
+        <h2 class="cta-banner-title">Ready to Orchestrate Your Dream Event?</h2>
+        <p class="cta-banner-desc">Step into the ANANDRIA dashboard. No sign-up required, works completely offline or with live Gemini AI.</p>
+        <button class="btn btn-primary btn-xl" id="btn-bottom-enter">
+          🚀 Enter Dashboard &amp; Planner Now →
+        </button>
+      </div>
+    </section>
+
+    <!-- Landing Footer -->
+    <footer class="landing-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">✦ ANANDRIA · GenAI Event Planning Assistant</div>
+        <div class="footer-copy">Built with Google Gemini 2.0 Flash · Fast, Deterministic, Accessible</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ======================================================
+       APP SHELL (sidebar + content)
+  ====================================================== -->
+  <div id="page-app" class="page page-app-hidden" aria-label="Application">
+
+    <!-- Sidebar -->
+    <aside id="app-sidebar" class="app-sidebar" aria-label="Main Navigation">
+      <!-- Sidebar Header / Logo -->
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <span class="sidebar-crest" aria-hidden="true">✦</span>
+          <div class="sidebar-brand-text">
+            <span class="sidebar-brand-name">ANANDRIA</span>
+            <span class="sidebar-brand-sub">Event Co-Pilot</span>
+          </div>
+        </div>
+        <button id="btn-sidebar-collapse" class="sidebar-collapse-btn" aria-label="Collapse sidebar" title="Collapse sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+      </div>
+
+      <!-- Nav: Primary Pages -->
+      <nav class="sidebar-nav" aria-label="Primary navigation">
+        <div class="sidebar-nav-section">
+          <p class="sidebar-nav-label">Main</p>
+          <ul class="sidebar-nav-list" role="list">
+            <li>
+              <button class="sidebar-nav-item active" data-view="dashboard" aria-current="page">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                <span class="nav-label">Dashboard</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-nav-item" data-view="my-events">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span class="nav-label">My Events</span>
+                <span class="nav-badge" id="events-count-badge">0</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-nav-item" data-view="create-event">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                <span class="nav-label">Create Event</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Nav: Active Event Tools (shown only when event is loaded) -->
+        <div class="sidebar-nav-section sidebar-event-tools hidden" id="sidebar-event-tools">
+          <p class="sidebar-nav-label">Active Event</p>
+          <ul class="sidebar-nav-list" role="list">
+            <li>
+              <button class="sidebar-nav-item" data-view="ai-assistant">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <span class="nav-label">AI Assistant</span>
+                <span class="nav-badge ai-badge">AI</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-nav-item" data-view="budget-planner">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                <span class="nav-label">Budget Planner</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-nav-item" data-view="tasks-timeline">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <span class="nav-label">Tasks & Timeline</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-nav-item" data-view="vendors">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+                <span class="nav-label">Vendor Checklist</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-nav-item" data-view="ideas-palettes">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+                <span class="nav-label">Ideas & Palettes</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-nav-item" data-view="guests">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span class="nav-label">Guests & RSVPs</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Nav: Settings / Tools -->
+        <div class="sidebar-nav-section sidebar-bottom-section">
+          <p class="sidebar-nav-label">Tools</p>
+          <ul class="sidebar-nav-list" role="list">
+            <li>
+              <button class="sidebar-nav-item" data-view="settings">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.07 4.93a10 10 0 0 1 1.64 13.07M4.93 4.93a10 10 0 0 0 0 14.14M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>
+                <span class="nav-label">Settings</span>
+              </button>
+            </li>
+            <li>
+              <button class="sidebar-nav-item" id="sidebar-diagnostics-btn">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                <span class="nav-label">Diagnostics</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Sidebar footer: mode status -->
+      <div class="sidebar-status-footer">
+        <div class="sidebar-mode-row">
+          <span class="status-dot" id="sidebar-status-dot"></span>
+          <span class="sidebar-mode-text" id="sidebar-mode-text">Initializing…</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Sidebar Mobile Overlay -->
+    <div id="sidebar-overlay" class="sidebar-overlay hidden" aria-hidden="true"></div>
+
+    <!-- Main Content Area -->
+    <div class="app-content-wrapper">
+
+      <!-- Top Bar -->
+      <header class="app-topbar" role="banner">
+        <div class="topbar-left">
+          <button id="btn-sidebar-mobile-toggle" class="sidebar-mobile-toggle" aria-label="Open navigation menu" aria-expanded="false">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <button id="btn-back-to-landing" class="btn btn-outline btn-sm btn-back-home" title="Return to Intro / Landing Page">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span>Home</span>
+          </button>
+          <div id="topbar-breadcrumb" class="topbar-breadcrumb">
+            <span class="breadcrumb-app">ANANDRIA</span>
+            <span class="breadcrumb-sep" aria-hidden="true">/</span>
+            <span class="breadcrumb-page" id="breadcrumb-page-label">Dashboard</span>
+          </div>
+        </div>
+        <div class="topbar-center" id="topbar-event-info" aria-live="polite">
+          <!-- Populated when event is active -->
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-gradient-new btn-sm topbar-new-btn" data-view="create-event" title="Create a new event plan">
+            + New Event
+          </button>
+          <select id="header-currency-switch" class="header-currency-select" aria-label="Switch display currency">
+            <option value="INR">INR ₹</option>
+            <option value="USD">USD $</option>
+            <option value="EUR">EUR €</option>
+            <option value="GBP">GBP £</option>
+          </select>
+          <button id="btn-export" class="btn btn-secondary btn-sm" aria-haspopup="menu" aria-expanded="false" title="Export Plan">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Export
+          </button>
+          <div id="export-dropdown" class="dropdown-menu hidden" role="menu">
+            <button class="dropdown-item" id="export-json" role="menuitem">Download JSON Blueprint</button>
+            <button class="dropdown-item" id="export-md" role="menuitem">Download Markdown Summary</button>
+            <button class="dropdown-item" id="export-print" role="menuitem">Print / Save as PDF</button>
+          </div>
+          <button id="btn-open-apikey" class="btn btn-outline btn-sm" aria-haspopup="dialog" title="Configure Gemini API Key">🔑 API Key</button>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main id="main-content" class="app-main-content" tabindex="-1">
+
+        <!-- ── VIEW: DASHBOARD (Matches Image 2 Structure & Clean Flow) ── -->
+        <div id="view-dashboard" class="app-view view-active" role="region" aria-label="Dashboard">
+          <!-- Welcome Header Row (Image 2 style) -->
+          <div class="dash-welcome-header">
+            <div class="dash-welcome-text">
+              <h2 class="dash-greeting">Welcome back! <span class="wave-hand" aria-hidden="true">👋</span></h2>
+              <p class="dash-subtitle">Here's an overview of all your events and planning progress.</p>
+            </div>
+            <button class="btn btn-gradient-new" data-view="create-event">
+              + New Event
+            </button>
+          </div>
+
+          <!-- 4 Stat Summary Cards (Image 2 style) -->
+          <div class="dash-summary-cards-grid">
+            <div class="dash-stat-box">
+              <div class="stat-icon-wrap icon-purple" aria-hidden="true">🎪</div>
+              <div class="stat-info">
+                <span class="stat-number" id="dash-total-events-num">0</span>
+                <span class="stat-title">Total Events</span>
+              </div>
+            </div>
+            <div class="dash-stat-box">
+              <div class="stat-icon-wrap icon-blue" aria-hidden="true">📅</div>
+              <div class="stat-info">
+                <span class="stat-number" id="dash-upcoming-events-num">0</span>
+                <span class="stat-title">Upcoming Events</span>
+              </div>
+            </div>
+            <div class="dash-stat-box">
+              <div class="stat-icon-wrap icon-green" aria-hidden="true">💰</div>
+              <div class="stat-info">
+                <span class="stat-number" id="dash-total-budget-num">₹0</span>
+                <span class="stat-title">Total Budget (<span id="dash-budget-curr">INR</span>)</span>
+              </div>
+            </div>
+            <div class="dash-stat-box">
+              <div class="stat-icon-wrap icon-teal" aria-hidden="true">✅</div>
+              <div class="stat-info">
+                <span class="stat-number" id="dash-tasks-completed-num">0/0</span>
+                <span class="stat-title">Tasks Completed</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Events Panel (Image 2 style) -->
+          <div class="recent-events-panel">
+            <div class="recent-events-header">
+              <h3 class="recent-events-title">Recent Events</h3>
+              <button class="btn-text-link" data-view="my-events">View All</button>
+            </div>
+            <div id="recent-events-body" class="recent-events-body">
+              <div class="recent-events-empty" id="recent-events-empty">
+                <div class="empty-popper-icon" aria-hidden="true">🎉</div>
+                <h4 class="empty-title">No Events Yet</h4>
+                <p class="empty-desc">Create your first celebration plan to start tracking progress.</p>
+                <button class="btn btn-gradient-new" data-view="create-event">
+                  + Create Event
+                </button>
+              </div>
+              <div class="recent-events-list hidden" id="recent-events-list"></div>
+            </div>
+          </div>
+
+          <!-- Active Event Details (Appears when an event is loaded or created) -->
+          <div id="dashboard-active-details" class="dashboard-active-details hidden">
+            <div class="active-event-section-header">
+              <div class="active-badge-pill">⚡ ACTIVE EVENT PLAN</div>
+              <h3 class="active-event-heading" id="active-event-heading">Active Celebration Plan</h3>
+            </div>
+
+            <!-- Plan Summary Banner -->
+            <div class="plan-summary-banner" role="region" aria-label="AI Event Plan Summary">
+              <div class="summary-icon" aria-hidden="true">✦</div>
+              <div class="summary-content">
+                <p class="summary-text" id="plan-summary-text">—</p>
+                <div class="summary-badges">
+                  <span class="badge" id="badge-head-cost">Est. Cost: — / head</span>
+                  <span class="badge" id="badge-vendor-progress">Vendors: 0% Booked</span>
+                  <span class="badge" id="badge-timeline-progress">Tasks: 0% Done</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Active Event Quick Nav Tiles -->
+            <div class="dash-nav-tiles">
+              <button class="dash-tile" data-view="budget-planner">
+                <span class="dash-tile-icon">💰</span>
+                <div class="dash-tile-info">
+                  <span class="dash-tile-label">Budget Planner</span>
+                  <span class="dash-tile-desc">Allocation sliders &amp; charts</span>
+                </div>
+                <span class="dash-tile-arrow">→</span>
+              </button>
+              <button class="dash-tile" data-view="tasks-timeline">
+                <span class="dash-tile-icon">📅</span>
+                <div class="dash-tile-info">
+                  <span class="dash-tile-label">Tasks &amp; Timeline</span>
+                  <span class="dash-tile-desc">Countdown ticker &amp; phases</span>
+                </div>
+                <span class="dash-tile-arrow">→</span>
+              </button>
+              <button class="dash-tile" data-view="vendors">
+                <span class="dash-tile-icon">🏢</span>
+                <div class="dash-tile-info">
+                  <span class="dash-tile-label">Vendor Checklist</span>
+                  <span class="dash-tile-desc">Outreach &amp; booking status</span>
+                </div>
+                <span class="dash-tile-arrow">→</span>
+              </button>
+              <button class="dash-tile" data-view="ideas-palettes">
+                <span class="dash-tile-icon">🎨</span>
+                <div class="dash-tile-info">
+                  <span class="dash-tile-label">Ideas &amp; Palettes</span>
+                  <span class="dash-tile-desc">Hex colors, themes &amp; menus</span>
+                </div>
+                <span class="dash-tile-arrow">→</span>
+              </button>
+              <button class="dash-tile" data-view="guests">
+                <span class="dash-tile-icon">👥</span>
+                <div class="dash-tile-info">
+                  <span class="dash-tile-label">Guests &amp; RSVPs</span>
+                  <span class="dash-tile-desc">Dietary breakdown &amp; roster</span>
+                </div>
+                <span class="dash-tile-arrow">→</span>
+              </button>
+              <button class="dash-tile" data-view="ai-assistant">
+                <span class="dash-tile-icon">🤖</span>
+                <div class="dash-tile-info">
+                  <span class="dash-tile-label">AI Assistant</span>
+                  <span class="dash-tile-desc">Natural language refinement</span>
+                </div>
+                <span class="dash-tile-arrow">→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── VIEW: MY EVENTS ── -->
+        <div id="view-my-events" class="app-view view-hidden" role="region" aria-label="My Events">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">My Events</h2>
+              <p class="view-subtitle">All your saved event plans, stored locally.</p>
+            </div>
+            <button class="btn btn-primary" data-view="create-event">+ New Event</button>
+          </div>
+          <div id="my-events-grid" class="my-events-grid">
+            <!-- Populated by sidebar.js -->
+            <div class="events-empty-state" id="events-empty-state">
+              <div class="empty-icon" aria-hidden="true">📋</div>
+              <p class="empty-text">No events yet. Create your first one!</p>
+              <button class="btn btn-primary" data-view="create-event">Create Event</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── VIEW: CREATE EVENT ── -->
+        <div id="view-create-event" class="app-view view-hidden" role="region" aria-label="Create Event">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">Create New Event</h2>
+              <p class="view-subtitle">Let ANANDRIA AI build your complete event plan.</p>
+            </div>
+          </div>
+          <!-- Intake Wizard Card -->
+          <div class="wizard-card" id="intake-wizard-card">
+            <form id="intake-form" novalidate>
+              <!-- Event Category -->
+              <fieldset class="form-fieldset">
+                <legend class="field-label font-bold">1. Select Event Category <span class="req">*</span></legend>
+                <div class="category-grid" role="radiogroup" aria-required="true">
+                  <label class="category-card selected" for="type-wedding">
+                    <input type="radio" id="type-wedding" name="event_type" value="Wedding" checked>
+                    <span class="card-icon" aria-hidden="true">💍</span>
+                    <span class="card-title">Wedding</span>
+                    <span class="card-desc">Ceremonies, banquets, bridal, sangeet &amp; rituals</span>
+                  </label>
+                  <label class="category-card" for="type-birthday">
+                    <input type="radio" id="type-birthday" name="event_type" value="Birthday">
+                    <span class="card-icon" aria-hidden="true">🎂</span>
+                    <span class="card-title">Birthday</span>
+                    <span class="card-desc">Milestones, theme decor, cakes &amp; dance party</span>
+                  </label>
+                  <label class="category-card" for="type-community">
+                    <input type="radio" id="type-community" name="event_type" value="Community Event">
+                    <span class="card-icon" aria-hidden="true">🎉</span>
+                    <span class="card-title">Community Event</span>
+                    <span class="card-desc">Festivals, cultural melas, feasts &amp; rallies</span>
+                  </label>
+                  <label class="category-card" for="type-college">
+                    <input type="radio" id="type-college" name="event_type" value="College Event">
+                    <span class="card-icon" aria-hidden="true">🎓</span>
+                    <span class="card-title">College Event</span>
+                    <span class="card-desc">Fests, pro-nites, hackathons, freshers &amp; concerts</span>
+                  </label>
+                  <label class="category-card" for="type-custom">
+                    <input type="radio" id="type-custom" name="event_type" value="Custom Event">
+                    <span class="card-icon" aria-hidden="true">⚡</span>
+                    <span class="card-title">Custom Event</span>
+                    <span class="card-desc">Corporate galas, retreats, launches &amp; celebrations</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <!-- Core Details -->
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="event_name" class="field-label">Event Name <span class="req">*</span></label>
+                  <input type="text" id="event_name" name="event_name" class="form-input" placeholder="e.g. Maya &amp; Kabir Royal Wedding" required maxlength="120" aria-describedby="event-name-desc">
+                  <span id="event-name-desc" class="field-help">A descriptive celebration title</span>
+                  <span class="field-error hidden" id="err-event_name" role="alert"></span>
+                </div>
+                <div class="form-group">
+                  <label for="target_date" class="field-label">Target Date <span class="req">*</span></label>
+                  <input type="date" id="target_date" name="target_date" class="form-input" required aria-describedby="target-date-desc">
+                  <span id="target-date-desc" class="field-help">Must be a future planning date</span>
+                  <span class="field-error hidden" id="err-target_date" role="alert"></span>
+                </div>
+              </div>
+
+              <!-- Capacity & Financials -->
+              <div class="form-grid-3">
+                <div class="form-group">
+                  <label for="guest_count" class="field-label">Guest Count <span class="req">*</span></label>
+                  <input type="number" id="guest_count" name="guest_count" class="form-input" min="1" max="50000" placeholder="e.g. 250" required aria-describedby="guest-count-desc">
+                  <span id="guest-count-desc" class="field-help">Total expected attendees</span>
+                  <span class="field-error hidden" id="err-guest_count" role="alert"></span>
+                </div>
+                <div class="form-group">
+                  <label for="currency" class="field-label">Currency</label>
+                  <select id="currency" name="currency" class="form-input">
+                    <option value="INR" selected>INR (₹)</option>
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="GBP">GBP (£)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="total_budget" class="field-label">Total Budget <span class="req">*</span></label>
+                  <input type="number" id="total_budget" name="total_budget" class="form-input" min="1" step="any" placeholder="e.g. 2500000" required aria-describedby="total-budget-desc">
+                  <span id="total-budget-desc" class="field-help">Overall financial allocation</span>
+                  <span class="field-error hidden" id="err-total_budget" role="alert"></span>
+                </div>
+              </div>
+
+              <!-- Style & Vibe -->
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="location" class="field-label">Location / Cultural Heritage</label>
+                  <input type="text" id="location" name="location" class="form-input" placeholder="e.g. Udaipur, Rajasthan – Rajasthani Heritage" maxlength="150">
+                  <span class="field-help">Geographic setting or regional traditions</span>
+                </div>
+                <div class="form-group">
+                  <label for="theme_keywords" class="field-label">Vibe &amp; Theme Keywords</label>
+                  <input type="text" id="theme_keywords" name="theme_keywords" class="form-input" placeholder="e.g. royal, palace, fairy-lights, vintage" maxlength="300">
+                  <span class="field-help">Comma-separated aesthetic keywords</span>
+                  <span class="field-error hidden" id="err-theme_keywords" role="alert"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="special_requirements" class="field-label">Dietary &amp; Accessibility Requirements</label>
+                <textarea id="special_requirements" name="special_requirements" class="form-input form-textarea" rows="2" placeholder="e.g. Jain catering for 50 guests, step-free wheelchair access for elderly relatives." maxlength="800"></textarea>
+                <span class="field-error hidden" id="err-special_requirements" role="alert"></span>
+              </div>
+
+              <!-- Actions -->
+              <div class="form-actions">
+                <button type="button" id="btn-prefill-demo" class="btn btn-outline" title="Fill with realistic sample data">
+                  <span aria-hidden="true">✨</span> Fill Sample Wedding
+                </button>
+                <button type="submit" id="btn-generate-plan" class="btn btn-primary btn-lg">
+                  <span class="btn-spinner hidden" id="gen-spinner" aria-hidden="true"></span>
+                  <span id="gen-btn-text">Generate AI Event Plan</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- AI loading state -->
+          <div id="ai-loading-state" class="ai-loading-state hidden" aria-live="polite">
+            <div class="ai-loading-orb"></div>
+            <p class="ai-loading-text">ANANDRIA AI is crafting your event plan…</p>
+            <p class="ai-loading-sub">This usually takes 5–15 seconds</p>
+          </div>
+        </div>
+
+        <!-- ── VIEW: AI ASSISTANT ── -->
+        <div id="view-ai-assistant" class="app-view view-hidden" role="region" aria-label="AI Assistant">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">AI Co-Pilot Assistant</h2>
+              <p class="view-subtitle">Refine and evolve your event plan with natural language commands.</p>
+            </div>
+          </div>
+
+          <!-- Quick Chips -->
+          <div class="ai-assist-chips" role="group" aria-label="Quick AI prompts">
+            <button class="chip-btn" data-prompt="Reduce budget by 15%">✂️ Trim Budget 15%</button>
+            <button class="chip-btn" data-prompt="Make it eco-friendly">🌿 Go Eco-Friendly</button>
+            <button class="chip-btn" data-prompt="Add outdoor rain backup tasks">🌧️ Rain Contingency</button>
+            <button class="chip-btn" data-prompt="Add more interactive entertainment ideas">🎊 More Entertainment</button>
+            <button class="chip-btn" data-prompt="Upgrade venue and catering by 20%">⬆️ Upgrade Premium</button>
+            <button class="chip-btn" data-prompt="Add wellness and spa activity ideas">🧘 Add Wellness</button>
+          </div>
+
+          <!-- AI Chat Area -->
+          <div class="ai-chat-area">
+            <div id="ai-chat-messages" class="ai-chat-messages" role="log" aria-live="polite" aria-label="AI chat history">
+              <div class="ai-chat-intro">
+                <div class="ai-avatar" aria-hidden="true">✦</div>
+                <div class="ai-intro-text">
+                  <strong>ANANDRIA AI</strong>
+                  <p>I'm your event planning co-pilot. Ask me anything — I can adjust your budget, add tasks, suggest themes, or completely reimagine your plan.</p>
+                </div>
+              </div>
+            </div>
+            <form id="copilot-form" class="ai-chat-input-row">
+              <label for="copilot-input" class="sr-only">Type AI refinement instruction</label>
+              <input type="text" id="copilot-input" class="copilot-input" placeholder="e.g. Prioritize candid photography and allocate 20% more to catering..." maxlength="400" required>
+              <button type="submit" id="btn-copilot-submit" class="btn btn-primary btn-copilot">
+                <span class="btn-spinner hidden" id="copilot-spinner" aria-hidden="true"></span>
+                <span id="copilot-btn-text">Send</span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- ── VIEW: BUDGET PLANNER ── -->
+        <div id="view-budget-planner" class="app-view view-hidden" role="region" aria-label="Budget Planner">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">Budget Planner</h2>
+              <p class="view-subtitle">Adjust sliders to rebalance funds. Real-time recalculation stays within total budget.</p>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <div id="budget-alert-box" class="budget-alert-box hidden" role="alert" aria-live="polite">
+                <span class="alert-icon" aria-hidden="true">⚠️</span>
+                <span id="budget-alert-msg">Budget Alert</span>
+              </div>
+              <button id="btn-open-add-budget" class="btn btn-secondary btn-sm">+ Add Category</button>
+            </div>
+          </div>
+
+          <!-- Stats -->
+          <div class="budget-stats-grid">
+            <div class="stat-card"><span class="stat-label">Total Budget</span><span class="stat-value" id="stat-total-budget">—</span></div>
+            <div class="stat-card"><span class="stat-label">Allocated Sum</span><span class="stat-value" id="stat-allocated-budget">—</span></div>
+            <div class="stat-card"><span class="stat-label">Actual Spend</span><span class="stat-value" id="stat-actual-budget">—</span></div>
+            <div class="stat-card"><span class="stat-label">Variance</span><span class="stat-value" id="stat-variance">—</span></div>
+          </div>
+
+          <!-- Charts -->
+          <div class="budget-visual-row">
+            <div class="chart-wrapper">
+              <h4 class="chart-title">Visual Allocation Share</h4>
+              <div id="budget-donut-chart" class="donut-chart-container" role="img" aria-label="Donut chart showing budget percentage per category"></div>
+            </div>
+            <div class="chart-wrapper">
+              <h4 class="chart-title">Category Progress &amp; Actuals</h4>
+              <div id="budget-bar-chart" class="bar-chart-container" role="region" aria-label="Bar charts showing allocated vs actual expense per category"></div>
+            </div>
+          </div>
+
+          <!-- Sliders -->
+          <div class="budget-sliders-container">
+            <h4 class="section-subheading">Fine-Tune Category Allocations</h4>
+            <div id="budget-items-list" class="budget-items-list" role="list"></div>
+          </div>
+        </div>
+
+        <!-- ── VIEW: TASKS & TIMELINE ── -->
+        <div id="view-tasks-timeline" class="app-view view-hidden" role="region" aria-label="Tasks and Timeline">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">Tasks &amp; Timeline</h2>
+              <p class="view-subtitle">From initial vision to celebration day. Check off tasks as you complete them.</p>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <div class="countdown-hero-precision" aria-label="Live event countdown ticker">
+                <div class="ticker-col">
+                  <span class="ticker-num" id="countdown-days">0</span>
+                  <span class="ticker-label">Days</span>
+                </div>
+                <span class="ticker-colon">:</span>
+                <div class="ticker-col">
+                  <span class="ticker-num" id="countdown-hours">00</span>
+                  <span class="ticker-label">Hours</span>
+                </div>
+                <span class="ticker-colon">:</span>
+                <div class="ticker-col">
+                  <span class="ticker-num" id="countdown-mins">00</span>
+                  <span class="ticker-label">Mins</span>
+                </div>
+                <span class="ticker-colon">:</span>
+                <div class="ticker-col">
+                  <span class="ticker-num" id="countdown-secs">00</span>
+                  <span class="ticker-label">Secs</span>
+                </div>
+              </div>
+              <button id="btn-open-add-milestone" class="btn btn-secondary btn-sm">+ Add Milestone</button>
+            </div>
+          </div>
+          <div id="timeline-container" class="timeline-container" role="feed" aria-label="Event milestone schedule"></div>
+        </div>
+
+        <!-- ── VIEW: VENDOR CHECKLIST ── -->
+        <div id="view-vendors" class="app-view view-hidden" role="region" aria-label="Vendor Checklist">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">Vendor Checklist</h2>
+              <p class="view-subtitle">Track vendor outreach, contracts, and estimated costs with interactive status toggles.</p>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <div class="vendor-progress-box">
+                <div class="progress-bar-bg" role="progressbar" id="vendor-progress-bar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar-fill" id="vendor-progress-fill" style="width: 0%;"></div>
+                </div>
+                <span class="progress-text" id="vendor-progress-text">0% Booked</span>
+              </div>
+              <button id="btn-open-add-vendor" class="btn btn-secondary btn-sm">+ Add Vendor</button>
+            </div>
+          </div>
+          <!-- Filters -->
+          <div class="vendor-toolbar">
+            <div class="search-box">
+              <label for="vendor-search" class="sr-only">Search vendors</label>
+              <input type="search" id="vendor-search" class="form-input search-input" placeholder="Search vendor name, task, or category...">
+            </div>
+            <div class="filter-group" role="group" aria-label="Filter vendors by status">
+              <button class="filter-btn active" data-status="All">All (<span id="count-all">0</span>)</button>
+              <button class="filter-btn" data-status="Pending">Pending (<span id="count-pending">0</span>)</button>
+              <button class="filter-btn" data-status="Contacted">Contacted (<span id="count-contacted">0</span>)</button>
+              <button class="filter-btn" data-status="Booked">Booked (<span id="count-booked">0</span>)</button>
+            </div>
+          </div>
+          <div id="vendor-cards-grid" class="vendor-cards-grid" role="list"></div>
+        </div>
+
+        <!-- ── VIEW: IDEAS & PALETTES ── -->
+        <div id="view-ideas-palettes" class="app-view view-hidden" role="region" aria-label="Ideas and Palettes">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">Ideas &amp; Palettes</h2>
+              <p class="view-subtitle">Curated themes, interactive color swatches, menu dishes, and engagement activities.</p>
+            </div>
+          </div>
+          <div class="ideas-layout">
+            <div class="ideas-block">
+              <h4 class="block-title"><span aria-hidden="true">🎨</span> Tailored Theme Concepts</h4>
+              <div id="themes-grid" class="themes-grid"></div>
+            </div>
+            <div class="ideas-block">
+              <h4 class="block-title"><span aria-hidden="true">✨</span> Recommended Color Palettes <span class="sub-hint">(Click any swatch to copy Hex)</span></h4>
+              <div id="palettes-grid" class="palettes-grid"></div>
+            </div>
+            <div class="ideas-block">
+              <h4 class="block-title"><span aria-hidden="true">🍽️</span> Curated Menu &amp; Food Stations</h4>
+              <ul id="menu-list" class="bullet-list" role="list"></ul>
+            </div>
+            <div class="ideas-block form-grid-2">
+              <div>
+                <h4 class="block-title"><span aria-hidden="true">🎊</span> Guest Engagement Activities</h4>
+                <ul id="activities-list" class="bullet-list" role="list"></ul>
+              </div>
+              <div>
+                <h4 class="block-title"><span aria-hidden="true">💡</span> Pro Decor &amp; Setup Tips</h4>
+                <ul id="decor-list" class="bullet-list" role="list"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── VIEW: GUESTS & RSVPs ── -->
+        <div id="view-guests" class="app-view view-hidden" role="region" aria-label="Guests and RSVPs">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">Guests &amp; RSVPs</h2>
+              <p class="view-subtitle">Manage invitations, dietary preferences, and seating with instant CSV exports.</p>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button id="btn-export-guests-csv" class="btn btn-outline btn-sm">Export CSV</button>
+              <button id="btn-open-add-guest" class="btn btn-primary btn-sm">+ Add Guest</button>
+            </div>
+          </div>
+          <!-- Metrics -->
+          <div class="guest-stats-row">
+            <div class="stat-card"><span class="stat-label">Total Expected</span><span class="stat-value" id="guest-metric-total">0</span></div>
+            <div class="stat-card"><span class="stat-label">Confirmed</span><span class="stat-value in-budget" id="guest-metric-confirmed">0</span></div>
+            <div class="stat-card"><span class="stat-label">Pending</span><span class="stat-value" id="guest-metric-pending">0</span></div>
+            <div class="stat-card"><span class="stat-label">Declined</span><span class="stat-value over-budget" id="guest-metric-declined">0</span></div>
+          </div>
+          <!-- Diet pills -->
+          <div class="diet-pills-bar" role="region" aria-label="Dietary meal preference distribution">
+            <span class="diet-pill veg">🥦 Vegetarian: <strong id="diet-veg-count">0</strong></span>
+            <span class="diet-pill jain">🪷 Jain: <strong id="diet-jain-count">0</strong></span>
+            <span class="diet-pill vegan">🌱 Vegan: <strong id="diet-vegan-count">0</strong></span>
+            <span class="diet-pill nonveg">🍗 Non-Veg: <strong id="diet-nonveg-count">0</strong></span>
+          </div>
+          <!-- Filters -->
+          <div class="vendor-toolbar">
+            <div class="search-box">
+              <label for="guest-search" class="sr-only">Search guest list</label>
+              <input type="search" id="guest-search" class="form-input search-input" placeholder="Search guest name, table, group, or notes...">
+            </div>
+            <div class="filter-group" role="group" aria-label="Filter guests by RSVP status">
+              <button class="filter-btn guest-filter-btn active" data-status="All">All</button>
+              <button class="filter-btn guest-filter-btn" data-status="Confirmed">Confirmed</button>
+              <button class="filter-btn guest-filter-btn" data-status="Pending">Pending</button>
+              <button class="filter-btn guest-filter-btn" data-status="Declined">Declined</button>
+            </div>
+          </div>
+          <div id="guest-cards-grid" class="guest-cards-grid" role="list"></div>
+        </div>
+
+        <!-- ── VIEW: SETTINGS ── -->
+        <div id="view-settings" class="app-view view-hidden" role="region" aria-label="Settings">
+          <div class="view-header">
+            <div>
+              <h2 class="view-title">Settings</h2>
+              <p class="view-subtitle">Configure your API key, preferences, and app options.</p>
+            </div>
+          </div>
+
+          <div class="settings-grid">
+            <!-- API Key Card -->
+            <div class="settings-card">
+              <div class="settings-card-header">
+                <span class="settings-card-icon">🔑</span>
+                <div>
+                  <h3 class="settings-card-title">Gemini API Key</h3>
+                  <p class="settings-card-desc">Connect your Google Gemini API key to enable live AI generation.</p>
+                </div>
+              </div>
+              <div class="settings-card-body">
+                <div class="form-group" style="margin-bottom:14px;">
+                  <label for="settings-api-key" class="field-label">API Key</label>
+                  <input type="password" id="settings-api-key" class="form-input" placeholder="AIzaSy..." autocomplete="off">
+                  <span class="field-help">Get a free key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color:var(--color-gold);">Google AI Studio</a></span>
+                </div>
+                <div style="display:flex;gap:10px;">
+                  <button id="btn-settings-clear-key" class="btn btn-outline btn-sm">Clear (Demo Mode)</button>
+                  <button id="btn-settings-save-key" class="btn btn-primary btn-sm">Save &amp; Activate</button>
+                </div>
+                <div id="settings-api-status" style="margin-top:10px;font-size:0.85rem;" aria-live="polite"></div>
+              </div>
+            </div>
+
+            <!-- Operational Mode Card -->
+            <div class="settings-card">
+              <div class="settings-card-header">
+                <span class="settings-card-icon">⚡</span>
+                <div>
+                  <h3 class="settings-card-title">Operational Mode</h3>
+                  <p class="settings-card-desc">Current engine powering event plan generation.</p>
+                </div>
+              </div>
+              <div class="settings-card-body">
+                <div class="mode-indicator" style="gap:10px;padding:12px 0;">
+                  <span class="status-dot" id="settings-status-dot"></span>
+                  <span id="settings-mode-text" style="font-size:0.95rem;font-weight:600;">Checking…</span>
+                </div>
+                <p style="font-size:0.82rem;color:var(--text-subtle);">Live mode uses Gemini 2.0 Flash for personalized AI generation. Demo mode uses a high-fidelity deterministic simulator — perfect for testing all features offline.</p>
+              </div>
+            </div>
+
+            <!-- Display Preferences -->
+            <div class="settings-card">
+              <div class="settings-card-header">
+                <span class="settings-card-icon">🎨</span>
+                <div>
+                  <h3 class="settings-card-title">Display Currency</h3>
+                  <p class="settings-card-desc">Choose the currency for budget display across the app.</p>
+                </div>
+              </div>
+              <div class="settings-card-body">
+                <select id="settings-currency" class="form-input" style="max-width:220px;" aria-label="Select currency">
+                  <option value="INR">INR (₹) – Indian Rupee</option>
+                  <option value="USD">USD ($) – US Dollar</option>
+                  <option value="EUR">EUR (€) – Euro</option>
+                  <option value="GBP">GBP (£) – British Pound</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Data Management -->
+            <div class="settings-card">
+              <div class="settings-card-header">
+                <span class="settings-card-icon">🗂️</span>
+                <div>
+                  <h3 class="settings-card-title">Data Management</h3>
+                  <p class="settings-card-desc">Manage locally cached event data stored in your browser.</p>
+                </div>
+              </div>
+              <div class="settings-card-body" style="display:flex;flex-wrap:wrap;gap:10px;">
+                <button id="btn-settings-export-json" class="btn btn-secondary btn-sm">📥 Export JSON Backup</button>
+                <button id="btn-settings-export-md" class="btn btn-secondary btn-sm">📄 Export Markdown</button>
+                <button id="btn-settings-clear-data" class="btn btn-outline btn-sm" style="border-color:var(--color-rose);color:var(--color-rose);">🗑️ Clear All Data</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- Modal: Gemini API Key Configurator -->
+  <div id="api-key-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="apikey-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon" aria-hidden="true">🔑</span>
+          <h2 id="apikey-title" class="modal-title">Configure Google Gemini API Key</h2>
+        </div>
+        <button id="btn-close-apikey" class="modal-close" aria-label="Close API Key dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Paste your free Gemini API key below. When configured, ANANDRIA unlocks live AI generation using <strong>Gemini 2.0 Flash</strong>. Without a key, the app seamlessly runs the built-in high-fidelity simulator.</p>
+        <form id="api-key-form">
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="input-api-key" class="field-label">Gemini API Key</label>
+            <input type="password" id="input-api-key" class="form-input" placeholder="AIzaSy..." autocomplete="off">
+            <span class="field-help">Obtain your free key from <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color: var(--color-gold);">Google AI Studio</a>.</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <button type="button" id="btn-clear-api-key" class="btn btn-outline btn-sm">Clear Key (Demo Mode)</button>
+            <button type="submit" class="btn btn-primary">Save &amp; Activate Key</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Custom Budget Category -->
+  <div id="add-budget-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="add-budget-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon" aria-hidden="true">💰</span>
+          <h2 id="add-budget-title" class="modal-title">Add Custom Budget Category</h2>
+        </div>
+        <button id="btn-close-budget-modal" class="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="add-budget-form">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label for="new-budget-name" class="field-label">Category Name <span class="req">*</span></label>
+            <input type="text" id="new-budget-name" class="form-input" placeholder="e.g. Drone Show &amp; Fireworks" required maxlength="80">
+          </div>
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label for="new-budget-amount" class="field-label">Allocation Amount <span class="req">*</span></label>
+            <input type="number" id="new-budget-amount" class="form-input" min="100" placeholder="e.g. 75000" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="new-budget-notes" class="field-label">Notes &amp; Specifications</label>
+            <input type="text" id="new-budget-notes" class="form-input" placeholder="e.g. Synchronized aerial choreography" maxlength="150">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Add Category to Budget</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Custom Milestone -->
+  <div id="add-milestone-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="add-milestone-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon" aria-hidden="true">📅</span>
+          <h2 id="add-milestone-title" class="modal-title">Add Timeline Milestone</h2>
+        </div>
+        <button id="btn-close-milestone-modal" class="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="add-milestone-form">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label for="new-milestone-phase" class="field-label">Timeline Phase</label>
+            <select id="new-milestone-phase" class="form-input">
+              <option value="6+ Months Out">6+ Months Out</option>
+              <option value="3-6 Months Out">3-6 Months Out</option>
+              <option value="1-3 Months Out">1-3 Months Out</option>
+              <option value="2-4 Weeks Out">2-4 Weeks Out</option>
+              <option value="1 Week Out">1 Week Out</option>
+              <option value="Day Before">Day Before</option>
+              <option value="Event Day">Event Day</option>
+              <option value="Post-Event">Post-Event</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label for="new-milestone-task" class="field-label">Milestone Task <span class="req">*</span></label>
+            <input type="text" id="new-milestone-task" class="form-input" placeholder="e.g. Finalize bridal henna artist" required maxlength="120">
+          </div>
+          <div class="form-grid-2" style="margin-bottom: 14px;">
+            <div class="form-group">
+              <label for="new-milestone-date" class="field-label">Target Due Date</label>
+              <input type="date" id="new-milestone-date" class="form-input">
+            </div>
+            <div class="form-group">
+              <label for="new-milestone-priority" class="field-label">Priority</label>
+              <select id="new-milestone-priority" class="form-input">
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="new-milestone-desc" class="field-label">Details / Notes</label>
+            <input type="text" id="new-milestone-desc" class="form-input" placeholder="e.g. Coordinate timing with cocktail arrival" maxlength="200">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Add Milestone</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Custom Vendor -->
+  <div id="add-vendor-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="add-vendor-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon" aria-hidden="true">🏢</span>
+          <h2 id="add-vendor-title" class="modal-title">Add Vendor / Service</h2>
+        </div>
+        <button id="btn-close-vendor-modal" class="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="add-vendor-form">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label for="new-vendor-name" class="field-label">Vendor Name / Company <span class="req">*</span></label>
+            <input type="text" id="new-vendor-name" class="form-input" placeholder="e.g. Royal Mirage Fireworks" required maxlength="100">
+          </div>
+          <div class="form-grid-2" style="margin-bottom: 14px;">
+            <div class="form-group">
+              <label for="new-vendor-cat" class="field-label">Category</label>
+              <select id="new-vendor-cat" class="form-input">
+                <option value="Entertainment">Entertainment</option>
+                <option value="Venue">Venue</option>
+                <option value="Catering">Catering</option>
+                <option value="Decor">Decor</option>
+                <option value="Media">Media</option>
+                <option value="Logistics">Logistics</option>
+                <option value="Styling">Styling</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="new-vendor-priority" class="field-label">Priority</label>
+              <select id="new-vendor-priority" class="form-input">
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label for="new-vendor-task" class="field-label">Scope of Work / Task <span class="req">*</span></label>
+            <input type="text" id="new-vendor-task" class="form-input" placeholder="e.g. 5-minute musical aerial fireworks finale" required maxlength="150">
+          </div>
+          <div class="form-grid-2" style="margin-bottom: 20px;">
+            <div class="form-group">
+              <label for="new-vendor-cost" class="field-label">Estimated Cost</label>
+              <input type="number" id="new-vendor-cost" class="form-input" min="0" placeholder="e.g. 50000">
+            </div>
+            <div class="form-group">
+              <label for="new-vendor-status" class="field-label">Initial Status</label>
+              <select id="new-vendor-status" class="form-input">
+                <option value="Pending" selected>Pending</option>
+                <option value="Contacted">Contacted</option>
+                <option value="Booked">Booked</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="new-vendor-notes" class="field-label">Contact Person &amp; Notes</label>
+            <input type="text" id="new-vendor-notes" class="form-input" placeholder="e.g. Contact: Vikram (+91 98765 43210)" maxlength="200">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Add Vendor to Checklist</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Guest -->
+  <div id="add-guest-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="add-guest-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon" aria-hidden="true">👥</span>
+          <h2 id="add-guest-title" class="modal-title">Add Attendee / Guest</h2>
+        </div>
+        <button id="btn-close-guest-modal" class="modal-close" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="add-guest-form">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label for="new-guest-name" class="field-label">Guest / Household Name <span class="req">*</span></label>
+            <input type="text" id="new-guest-name" class="form-input" placeholder="e.g. Siddharth &amp; Rhea Kapoor" required maxlength="100">
+          </div>
+          <div class="form-grid-3" style="margin-bottom: 14px;">
+            <div class="form-group">
+              <label for="new-guest-group" class="field-label">Group</label>
+              <select id="new-guest-group" class="form-input">
+                <option value="Family">Family</option>
+                <option value="Close Friends">Close Friends</option>
+                <option value="Colleagues">Colleagues</option>
+                <option value="Neighbors">Neighbors</option>
+                <option value="VIP">VIP</option>
+                <option value="Community">Community</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="new-guest-diet" class="field-label">Diet</label>
+              <select id="new-guest-diet" class="form-input">
+                <option value="Vegetarian" selected>Vegetarian</option>
+                <option value="Jain">Jain</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Non-Vegetarian">Non-Veg</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="new-guest-status" class="field-label">RSVP</label>
+              <select id="new-guest-status" class="form-input">
+                <option value="Confirmed" selected>Confirmed</option>
+                <option value="Pending">Pending</option>
+                <option value="Declined">Declined</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid-2" style="margin-bottom: 14px;">
+            <div class="form-group">
+              <label for="new-guest-plus" class="field-label">Plus-Ones Count</label>
+              <input type="number" id="new-guest-plus" class="form-input" min="0" max="10" value="0">
+            </div>
+            <div class="form-group">
+              <label for="new-guest-table" class="field-label">Assigned Table / Zone</label>
+              <input type="text" id="new-guest-table" class="form-input" placeholder="e.g. Table 3 (VIP)">
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom: 20px;">
+            <label for="new-guest-notes" class="field-label">Special Accommodations / Dietary Notes</label>
+            <input type="text" id="new-guest-notes" class="form-input" placeholder="e.g. High-chair needed for toddler" maxlength="200">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Save Guest to Roster</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Self-Diagnostics -->
+  <div id="diagnostics-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="diag-title">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon" aria-hidden="true">🧪</span>
+          <h2 id="diag-title" class="modal-title">ANANDRIA Self-Test Diagnostics</h2>
+        </div>
+        <button id="btn-close-diagnostics" class="modal-close" aria-label="Close diagnostics dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">Executes real-time automated verification suites covering <strong>Budget Math Sums</strong>, <strong>Input Sanitization &amp; XSS Stripping</strong>, <strong>Prompt Injection Traps</strong>, and <strong>AI Response Schemas</strong>.</p>
+        <div class="diag-action-bar">
+          <button id="btn-run-all-tests" class="btn btn-primary">
+            <span class="btn-spinner hidden" id="diag-spinner" aria-hidden="true"></span>
+            <span id="diag-btn-text">Run Complete Test Suite</span>
+          </button>
+          <div id="diag-summary-badge" class="diag-summary-badge hidden" aria-live="polite"></div>
+        </div>
+        <div id="diag-results-list" class="diag-results-list" role="region" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toast-container" class="toast-container" aria-live="polite" role="status"></div>
+
+  <!-- JavaScript (with cache-busting v=2.2) -->
+  <script src="/static/js/storage.js?v=2.2"></script>
+  <script src="/static/js/api.js?v=2.2"></script>
+  <script src="/static/js/budget.js?v=2.2"></script>
+  <script src="/static/js/timeline.js?v=2.2"></script>
+  <script src="/static/js/vendors.js?v=2.2"></script>
+  <script src="/static/js/ideas.js?v=2.2"></script>
+  <script src="/static/js/guests.js?v=2.2"></script>
+  <script src="/static/js/copilot.js?v=2.2"></script>
+  <script src="/static/js/diagnostics.js?v=2.2"></script>
+  <script src="/static/js/sidebar.js?v=2.2"></script>
+  <script src="/static/js/app.js?v=2.2"></script>
+</body>
+</html>
