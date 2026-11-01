@@ -75,8 +75,22 @@ async def health_check():
         "operational_mode": "live" if is_live else "demo_mode",
         "gemini_configured": has_key,
         "cooldown_seconds": config.RATE_LIMIT_COOLDOWN_SECONDS,
+        "anandria_service_bound": bool(config.ANANDRIA_SERVICE_URL),
         "timestamp": time.time()
     }
+
+@app.get("/service/anandria/status")
+async def anandria_service_status():
+    """Queries the internal anandria service using the bound service URL."""
+    if not config.ANANDRIA_SERVICE_URL:
+        return {"bound": False, "message": "ANANDRIA_SERVICE_URL not bound."}
+    try:
+        import httpx
+        async with httpx.AsyncClient(timeout=5.0) as client:
+            resp = await client.get(config.ANANDRIA_SERVICE_URL)
+            return {"bound": True, "target_url": config.ANANDRIA_SERVICE_URL, "status_code": resp.status_code}
+    except Exception as e:
+        return {"bound": True, "target_url": config.ANANDRIA_SERVICE_URL, "error": str(e)}
 
 @app.post("/api/plan/generate", response_model=EventPlanResponse)
 async def generate_plan(request: Request, intake: EventIntakeRequest):

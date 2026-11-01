@@ -1,17 +1,35 @@
 {
-  "version": 2,
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "services": {
+    "app": {
+      "root": ".",
+      "framework": "fastapi",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "anandria",
+          "format": "url",
+          "env": "ANANDRIA_SERVICE_URL"
+        }
+      ]
+    },
+    "anandria": {
+      "root": "anandria",
+      "framework": "vite"
+    }
+  },
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index.py"
-    },
-    {
-      "source": "/static/(.*)",
-      "destination": "/static/$1"
+      "destination": {
+        "service": "app"
+      }
     },
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": {
+        "service": "app"
+      }
     }
   ]
 }

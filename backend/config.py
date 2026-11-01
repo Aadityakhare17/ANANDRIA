@@ -21,3 +21,7 @@ DEMO_MODE = os.getenv("DEMO_MODE", "false").lower() in ("true", "1", "yes")
 
 # Rate limit cooldown in seconds between plan generation requests per client IP
 RATE_LIMIT_COOLDOWN_SECONDS = 3
+
+# Vercel Multi-Service Binding
+ANANDRIA_SERVICE_URL = os.getenv("ANANDRIA_SERVICE_URL", "").rstrip("/")
+
