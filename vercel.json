@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "rewrites": [
     {
       "source": "/api/(.*)",
@@ -9,12 +10,8 @@
       "destination": "/static/$1"
     },
     {
-      "source": "/",
-      "destination": "/static/index.html"
-    },
-    {
-      "source": "/((?!api|static).*)",
-      "destination": "/static/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }

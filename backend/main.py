@@ -59,6 +59,8 @@ async def serve_index():
     """Serves the main single-page application."""
     index_file = STATIC_DIR / "index.html"
     if not index_file.exists():
+        index_file = BASE_DIR / "index.html"
+    if not index_file.exists():
         raise HTTPException(status_code=404, detail="Frontend index.html not found.")
     return FileResponse(index_file)
 
