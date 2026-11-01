@@ -1,9 +1,8 @@
-import os
 import json
 from datetime import datetime, date, timedelta
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, Optional
 from backend import config
-from backend.utils.budget_calc import generate_initial_budget, recalculate_slider_adjustment
+from backend.utils.budget_calc import generate_initial_budget
 from backend.utils.sanitizer import detect_prompt_injection, sanitize_text
 
 # System instruction establishing strict persona and output format boundaries

@@ -16,6 +16,7 @@ INJECTION_PATTERNS = [
     r"system\s*:\s*you\s+are",
     r"system\s+prompt\s+override",
     r"reveal\s+(?:your\s+)?(?:system\s+prompt|hidden\s+instructions|api\s+key)",
+    r"</?(?:user_supplied_input|system|assistant)>",
 ]
 
 COMPILED_INJECTIONS = [re.compile(p, re.IGNORECASE) for p in INJECTION_PATTERNS]
@@ -120,7 +121,7 @@ def validate_and_sanitize_intake(data: Dict[str, Any]) -> Tuple[bool, Dict[str, 
     # Currency
     curr = data.get("currency", "INR").strip().upper()
     if curr not in ["INR", "USD", "EUR", "GBP"]:
-        sanitized["currency"] = "INR"
+        errors["currency"] = f"Unsupported currency '{curr}'. Supported currencies are: INR, USD, EUR, GBP."
     else:
         sanitized["currency"] = curr
 

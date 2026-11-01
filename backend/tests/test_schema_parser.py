@@ -82,3 +82,40 @@ def test_normalize_camel_case_keys():
     assert normalized["timeline"][0]["due_date"] == "2027-01-01"
     assert "color_palettes" in normalized["personalized_ideas"]
 
+def test_college_and_custom_mock_schema_conformance(valid_future_date):
+    """Ensure College Event and Custom Event mock plans strictly validate against EventPlanResponse."""
+    for event_type in ["College Event", "Custom Event"]:
+        intake = {
+            "event_type": event_type,
+            "event_name": f"Grand {event_type}",
+            "target_date": valid_future_date,
+            "guest_count": 400,
+            "total_budget": 600000.0,
+            "currency": "INR",
+            "location": "Central Arena",
+            "theme_keywords": "festive, neon, grand",
+            "special_requirements": "Security and lighting"
+        }
+        plan_dict = generate_mock_event_plan(intake)
+        validated = EventPlanResponse.model_validate(plan_dict)
+        assert len(validated.budget_breakdown) >= 6
+        assert len(validated.timeline) >= 6
+        assert len(validated.vendor_checklist) >= 6
+
+def test_color_palette_hex_format_validation():
+    """Verify color palettes in generated mock plans contain valid hex color strings."""
+    intake = {
+        "event_type": "Wedding",
+        "event_name": "Royal Gala",
+        "target_date": "2027-06-01",
+        "guest_count": 100,
+        "total_budget": 200000.0,
+        "currency": "INR"
+    }
+    plan = generate_mock_event_plan(intake)
+    for palette in plan["personalized_ideas"]["color_palettes"]:
+        assert len(palette["colors"]) >= 3
+        for hex_code in palette["colors"]:
+            assert hex_code.startswith("#"), f"Invalid hex code: {hex_code}"
+            assert len(hex_code) == 7, f"Hex code must be 7 chars: {hex_code}"
+

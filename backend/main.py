@@ -2,13 +2,13 @@ import time
 from pathlib import Path
 from typing import Dict, Any
 from fastapi import FastAPI, Request, HTTPException, status
-from fastapi.responses import HTMLResponse, JSONResponse, FileResponse
+from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend import config
 from backend.utils.schemas import EventIntakeRequest, RefinePlanRequest, EventPlanResponse
-from backend.utils.sanitizer import validate_and_sanitize_intake, sanitize_text, detect_prompt_injection
+from backend.utils.sanitizer import validate_and_sanitize_intake
 from backend.utils.budget_calc import recalculate_slider_adjustment
 from backend.services.gemini_service import (
     generate_mock_event_plan,
@@ -22,12 +22,30 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# CORS Middleware
+# Security Headers Middleware
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    """Enforces strict security headers (CSP, X-Frame-Options, HSTS, Referrer-Policy)."""
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self' https: data: blob: 'unsafe-inline' 'unsafe-eval'; "
+        "font-src 'self' https://fonts.gstatic.com data:; "
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+        "img-src 'self' data: https: blob:;"
+    )
+    return response
+
+# CORS Middleware (secure defaults)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -162,8 +180,6 @@ async def run_diagnostics():
     Executes automated backend tests and reports status for the in-app self-test modal.
     """
     import pytest
-    from io import StringIO
-    import sys
 
     # Run pytest directly against the backend/tests directory
     tests_dir = str(BASE_DIR / "backend" / "tests")

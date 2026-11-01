@@ -1,4 +1,3 @@
-import math
 from typing import List, Dict, Any, Tuple
 
 # Baseline percentage breakdowns for each event type (totaling 100%)
