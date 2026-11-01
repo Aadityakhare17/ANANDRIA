@@ -1,8 +1,7 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useAppContext, ACTIONS } from '../context/AppContext.jsx';
 import { formatCurrency, getCurrencySymbol, checkOverBudget, recalculateBudget } from '../utils/budgetCalc.js';
 import { BUDGET_COLORS } from '../utils/constants.js';
-import { debounce } from '../utils/storage.js';
 import {
   PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend,
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
@@ -11,7 +10,7 @@ import { AlertTriangle, CheckCircle2, TrendingUp, Edit3 } from 'lucide-react';
 
 function CustomTooltip({ active, payload, currency }) {
   if (!active || !payload?.length) return null;
-  const { name, value, payload: item } = payload[0];
+  const { value, payload: item } = payload[0];
   return (
     <div className="chart-tooltip" role="tooltip">
       <p className="tooltip-label">{item.category}</p>
@@ -123,14 +122,6 @@ export default function BudgetTab() {
   );
 
   const { overBudget, excess, sum } = checkOverBudget(budgetItems, parseFloat(totalBudget));
-
-  // Debounced budget update dispatch
-  const debouncedDispatch = useCallback(
-    debounce((id, updates) => {
-      dispatch({ type: ACTIONS.UPDATE_BUDGET_ITEM, payload: { id, updates } });
-    }, 150),
-    [dispatch]
-  );
 
   function handleAmountChange(id, newAmount, newActual, isActual = false) {
     if (isActual) {

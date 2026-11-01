@@ -60,7 +60,7 @@ export default function TimelineTab() {
   const { state, dispatch } = useAppContext();
   const { plan, formData } = state;
 
-  const milestones = plan?.timeline || [];
+  const milestones = useMemo(() => plan?.timeline || [], [plan?.timeline]);
   const daysLeft = formData.targetDate ? daysUntilEvent(formData.targetDate) : null;
   const completion = calcTimelineCompletion(milestones);
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppProvider, useAppContext, ACTIONS } from './context/AppContext.jsx';
+import { AppProvider, useAppContext } from './context/AppContext.jsx';
 import IntakeWizard from './components/IntakeWizard.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import DiagnosticsModal from './components/DiagnosticsModal.jsx';

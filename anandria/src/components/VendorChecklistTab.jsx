@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useAppContext, ACTIONS } from '../context/AppContext.jsx';
 import { formatCurrency, calcVendorCompletion } from '../utils/budgetCalc.js';
 import { debounce } from '../utils/storage.js';
@@ -74,12 +74,12 @@ export default function VendorChecklistTab() {
   const { plan, formData, vendorFilter, vendorStatusFilter } = state;
   const { currency } = formData;
 
-  const vendors = plan?.vendorChecklist || [];
+  const vendors = useMemo(() => plan?.vendorChecklist || [], [plan?.vendorChecklist]);
 
   // Debounced search filter
   const [localFilter, setLocalFilter] = useState(vendorFilter);
-  const debouncedSetFilter = useCallback(
-    debounce((val) => dispatch({ type: ACTIONS.SET_VENDOR_FILTER, payload: val }), 300),
+  const debouncedSetFilter = useMemo(
+    () => debounce((val) => dispatch({ type: ACTIONS.SET_VENDOR_FILTER, payload: val }), 300),
     [dispatch]
   );
 

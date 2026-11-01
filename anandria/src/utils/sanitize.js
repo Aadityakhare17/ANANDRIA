@@ -112,7 +112,6 @@ export function validateEventForm(formData) {
 
   // Location / Cultural style (optional)
   sanitized.location = sanitizeText(formData.location || '');
-  sanitized.currency = sanitized.currency; // already set
 
   return {
     valid: Object.keys(errors).length === 0,

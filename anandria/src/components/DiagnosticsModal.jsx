@@ -166,7 +166,7 @@ const TEST_CASES = [
         const broken = '{invalid json}';
         JSON.parse(broken);
         return { pass: false, detail: 'Should have thrown a parse error' };
-      } catch (e) {
+      } catch {
         // Graceful catch – the service layer handles this
         return { pass: true, detail: 'JSON.parse throw is caught correctly' };
       }

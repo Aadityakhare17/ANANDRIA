@@ -11,7 +11,7 @@ import IdeasTab from './IdeasTab.jsx';
 import CoPilotBar from './CoPilotBar.jsx';
 import {
   BarChart2, Calendar, CheckSquare, Lightbulb,
-  Settings, Download, RefreshCw, Beaker, Loader2,
+  Download, RefreshCw, Beaker, Loader2,
   FileJson, FileText, X, ChevronLeft
 } from 'lucide-react';
 
@@ -24,7 +24,7 @@ const TAB_CONFIG = [
 
 export default function Dashboard() {
   const { state, dispatch, setActiveTab } = useAppContext();
-  const { refine, clearPlan } = useEventPlan();
+  const { clearPlan } = useEventPlan();
   const { plan, formData, activeTab, showExportMenu, isRefining, generationError } = state;
   const [showConfirmClear, setShowConfirmClear] = useState(false);
 

@@ -61,28 +61,28 @@ describe('validatePlanSchema – invalid inputs', () => {
   });
 
   it('fails when budgetBreakdown is missing', () => {
-    const { budgetBreakdown, ...noBudget } = validPlan;
+    const { budgetBreakdown: _bb, ...noBudget } = validPlan;
     const { valid, errors } = validatePlanSchema(noBudget);
     expect(valid).toBe(false);
     expect(errors.some((e) => e.includes('budgetBreakdown'))).toBe(true);
   });
 
   it('fails when timeline is missing', () => {
-    const { timeline, ...noTimeline } = validPlan;
+    const { timeline: _tl, ...noTimeline } = validPlan;
     const { valid, errors } = validatePlanSchema(noTimeline);
     expect(valid).toBe(false);
     expect(errors.some((e) => e.includes('timeline'))).toBe(true);
   });
 
   it('fails when vendorChecklist is missing', () => {
-    const { vendorChecklist, ...noVendors } = validPlan;
+    const { vendorChecklist: _vc, ...noVendors } = validPlan;
     const { valid, errors } = validatePlanSchema(noVendors);
     expect(valid).toBe(false);
     expect(errors.some((e) => e.includes('vendorChecklist'))).toBe(true);
   });
 
   it('fails when personalizedIdeas is missing', () => {
-    const { personalizedIdeas, ...noIdeas } = validPlan;
+    const { personalizedIdeas: _pi, ...noIdeas } = validPlan;
     const { valid, errors } = validatePlanSchema(noIdeas);
     expect(valid).toBe(false);
     expect(errors.some((e) => e.includes('personalizedIdeas'))).toBe(true);

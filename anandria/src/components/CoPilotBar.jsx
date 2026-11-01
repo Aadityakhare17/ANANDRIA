@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAppContext, ACTIONS } from '../context/AppContext.jsx';
+import { useAppContext } from '../context/AppContext.jsx';
 import { useEventPlan } from '../hooks/useEventPlan.js';
 import { validateRefinementPrompt } from '../utils/sanitize.js';
 import { Sparkles, Send, Loader2, X } from 'lucide-react';
@@ -14,9 +14,9 @@ const QUICK_PROMPTS = [
 ];
 
 export default function CoPilotBar() {
-  const { state, dispatch } = useAppContext();
+  const { state } = useAppContext();
   const { refine } = useEventPlan();
-  const { refinementPrompt, isRefining, plan } = state;
+  const { isRefining, plan } = state;
   const [localPrompt, setLocalPrompt] = useState('');
   const [error, setError] = useState('');
   const [showQuick, setShowQuick] = useState(false);

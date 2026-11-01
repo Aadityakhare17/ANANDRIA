@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAppContext } from '../context/AppContext.jsx';
 import { Palette, Utensils, Music, Lightbulb, Star, ChevronDown, ChevronUp } from 'lucide-react';
 
-function ColorSwatch({ color, index }) {
+function ColorSwatch({ color }) {
   const [showHex, setShowHex] = useState(false);
   return (
     <button

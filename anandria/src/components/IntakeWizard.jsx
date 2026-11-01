@@ -67,14 +67,12 @@ export default function IntakeWizard() {
 
   // Quick-fill demo data
   function fillDemo() {
+    const d = new Date();
+    d.setMonth(d.getMonth() + 8);
     updateFormData({
       eventType: 'Wedding',
       eventName: 'Priya & Arjun Wedding',
-      targetDate: (() => {
-        const d = new Date();
-        d.setMonth(d.getMonth() + 8);
-        return d.toISOString().split('T')[0];
-      })(),
+      targetDate: d.toISOString().split('T')[0],
       guestCount: '250',
       totalBudget: '2500000',
       currency: 'INR',
@@ -84,11 +82,11 @@ export default function IntakeWizard() {
     });
   }
 
-  const minDate = (() => {
+  const [minDate] = useState(() => {
     const d = new Date();
     d.setDate(d.getDate() + 1);
     return d.toISOString().split('T')[0];
-  })();
+  });
 
   return (
     <div className="wizard-overlay" role="dialog" aria-modal="true" aria-label="Event Planning Wizard">

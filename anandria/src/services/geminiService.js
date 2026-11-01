@@ -1,4 +1,4 @@
-import { detectPromptInjection, sanitizeText } from '../utils/sanitize.js';
+import { detectPromptInjection } from '../utils/sanitize.js';
 
 // ─── Gemini API Configuration ─────────────────────────────────────────────────
 
@@ -372,7 +372,6 @@ function generateMockPlan(formData, refinementHint = '') {
   const budget = parseFloat(totalBudget) || 500000;
   const isWedding = eventType === 'Wedding';
   const isBirthday = eventType === 'Birthday';
-  const isCommunity = eventType === 'Community Event';
 
   // Smart budget allocation based on event type
   const allocations = isWedding
@@ -417,7 +416,7 @@ function generateMockPlan(formData, refinementHint = '') {
   };
 }
 
-function getBudgetNote(category, guestCount, currency) {
+function getBudgetNote(category, guestCount, _currency) {
   const notes = {
     Venue: `Based on ${guestCount} guests – consider both indoor and outdoor options`,
     Catering: `Includes food, beverages, service staff, and setup`,
